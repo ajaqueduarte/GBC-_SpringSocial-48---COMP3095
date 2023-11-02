@@ -5,14 +5,14 @@ db = db.getSiblingDB('springsocial');
 
 db.createUser(
     {
-        user: 'rootadmin',
-        password: 'password',
+        user: 'mongoadmin',
+        pwd: 'password',
         roles: [{role: 'readWrite', db: 'springsocial'}]
     }
 );
 
 db.createCollection("comment");
 db.createCollection("post");
-db.createCollection("user");
+// db.createCollection("user");
 
 print("END");

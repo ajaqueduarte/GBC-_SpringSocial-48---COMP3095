@@ -1,6 +1,7 @@
 package ca.gbc.friendship.service;
 
 import ca.gbc.friendship.dto.FriendshipRequest;
+import ca.gbc.friendship.dto.FriendshipResponse;
 import ca.gbc.friendship.model.Friendship;
 import ca.gbc.friendship.repository.FriendshipRepository;
 import lombok.RequiredArgsConstructor;
@@ -10,8 +11,9 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
-
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -26,6 +28,13 @@ public class FriendshipImpl implements FriendshipService {
         Friendship fs = mongoTemplate.findOne(query, Friendship.class);
 
         if (fs == null) {
+            List<Long> friends = new ArrayList<>();
+            friends.add(friendshipRequest.getOtherUserId());
+            mongoTemplate.save(Friendship
+                    .builder()
+                    .userId(friendshipRequest.getUserId())
+                    .friends(friends)
+                    .build());
             return;
         }
 
@@ -44,5 +53,20 @@ public class FriendshipImpl implements FriendshipService {
         }
 
         fs.getFriends().removeIf(x -> Objects.equals(x, friendshipRequest.getOtherUserId()));
+    }
+    @Override
+    public FriendshipResponse getFriendList(Long userId) {
+        Query query = new Query().addCriteria(Criteria.where("userId").is(userId));
+        Friendship fs = mongoTemplate.findOne(query, Friendship.class);
+
+        if (fs == null) {
+            return null;
+        }
+
+        return FriendshipResponse
+                .builder()
+                .userId(userId)
+                .friendList(fs.getFriends())
+                .build();
     }
 }
