@@ -11,9 +11,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class UserResponse {
-    private Long id;
-    private String username;
-    private String email;
-    private String password;
+    // Data transfer object (DTO) for representing user information in responses
 
+    private Long id;         // User's unique identifier
+    private String username; // User's username
+    private String email;    // User's email address
+    private String password; // User's password (Note: Be cautious about exposing passwords in responses)
 }

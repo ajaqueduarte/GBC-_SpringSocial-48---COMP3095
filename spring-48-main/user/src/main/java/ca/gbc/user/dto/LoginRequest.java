@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class LoginRequest {
-    private String username;
-    private String password;
+    // Data transfer object (DTO) for user login request
+
+    private String username; // User's username
+    private String password; // User's password
 }

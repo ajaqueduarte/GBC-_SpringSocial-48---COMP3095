@@ -16,7 +16,7 @@ import java.util.List;
 @Data
 public class Friendship {
     @Id
-    private String id;
-    private Long userId;
-    private List<Long> friends;
+    private String id;          // Unique identifier for the friendship entity
+    private Long userId;        // ID of the user associated with the friendship
+    private List<Long> friends; // List of IDs representing the user's friends
 }

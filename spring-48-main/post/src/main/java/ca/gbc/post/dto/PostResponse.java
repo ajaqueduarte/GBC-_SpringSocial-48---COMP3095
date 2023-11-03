@@ -11,8 +11,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class PostResponse {
-    private String id;
-    private String title;
-    private String content;
-    private String author;
+    // Data transfer object (DTO) for representing a post in responses
+
+    private String id;       // Post's unique identifier
+    private String title;    // Post's title
+    private String content;  // Post's content
+    private String author;   // Author of the post
 }
+

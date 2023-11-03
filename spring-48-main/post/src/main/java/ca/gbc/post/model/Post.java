@@ -14,9 +14,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Builder
 @Data
 public class Post {
+    // Model class representing a post in a MongoDB database
+
     @Id
-    private String id;
-    private String title;
-    private String content;
-    private String author;
+    private String id;       // Post's unique identifier
+    private String title;    // Post's title
+    private String content;  // Post's content
+    private String author;   // Author of the post
 }
+

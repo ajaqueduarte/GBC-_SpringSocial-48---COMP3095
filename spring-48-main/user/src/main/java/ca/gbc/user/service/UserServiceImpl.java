@@ -20,9 +20,10 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
+    // Method to create a new user
     @Override
     public void createUser(UserRequest userRequest) {
-        log.info("Creating a new user {}", userRequest.getUsername());
+        log.info("Creating a new user with username: {}", userRequest.getUsername());
 
         User user = User.builder()
                 .username(userRequest.getUsername())
@@ -34,9 +35,10 @@ public class UserServiceImpl implements UserService {
         log.info("User {} is saved", user.getId());
     }
 
+    // Method to update user information
     @Override
     public String updateUser(Long userId, UserRequest userRequest) {
-        log.info("Updating a user with Id {}", userId);
+        log.info("Updating user with ID: {}", userId);
 
         User query = User.builder().id(userId).build();
         Optional<User> user = userRepository.findOne(Example.of(query));
@@ -54,6 +56,7 @@ public class UserServiceImpl implements UserService {
         return "";
     }
 
+    // Method to authenticate and log in a user
     @Override
     public UserResponse loginUser(String username, String password) {
         User query = User.builder().username(username).password(password).build();
@@ -62,12 +65,14 @@ public class UserServiceImpl implements UserService {
         return user.map(this::mapToUserResponse).orElse(null);
     }
 
+    // Method to delete a user
     @Override
     public void deleteUser(Long userId) {
-        log.info("User {} is deleted", userId);
+        log.info("Deleting user with ID: {}", userId);
         userRepository.deleteById(userId);
     }
 
+    // Method to retrieve a list of all users
     @Override
     public List<UserResponse> getAllUsers() {
         log.info("Returning a list of users");
@@ -76,10 +81,10 @@ public class UserServiceImpl implements UserService {
         return users.stream().map(this::mapToUserResponse).collect(Collectors.toList());
     }
 
-
+    // Method to retrieve user information by their ID
     @Override
     public UserResponse getUserById(Long userId) {
-        log.info("Fetching user with Id {}", userId);
+        log.info("Fetching user with ID: {}", userId);
 
         User query = User.builder().id(userId).build();
         Optional<User> user = userRepository.findOne(Example.of(query));
@@ -88,10 +93,11 @@ public class UserServiceImpl implements UserService {
             return mapToUserResponse(user.get());
         }
 
-        log.warn("User with Id {} not found", userId);
-        return null;  // Or you can throw a custom exception
+        log.warn("User with ID {} not found", userId);
+        return null;  // Alternatively, you can throw a custom exception
     }
 
+    // Helper method to map User entity to UserResponse DTO
     private UserResponse mapToUserResponse(User user) {
         return UserResponse.builder()
                 .id(user.getId())
@@ -100,6 +106,4 @@ public class UserServiceImpl implements UserService {
                 .password(user.getPassword())
                 .build();
     }
-
-
 }

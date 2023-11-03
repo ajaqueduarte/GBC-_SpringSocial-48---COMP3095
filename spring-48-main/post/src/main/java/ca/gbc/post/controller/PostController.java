@@ -18,20 +18,21 @@ public class PostController {
 
     private final PostServiceImpl postService;
 
+    // Endpoint for creating a new post
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void createPost(@RequestBody PostRequest postRequest) {
-
         postService.createPost(postRequest);
     }
 
+    // Endpoint to retrieve a list of all posts
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<PostResponse> getAllPosts() {
-
         return postService.getAllPosts();
     }
 
+    // Endpoint to update a post
     @PutMapping("/{postId}")
     public ResponseEntity<?> updatePost(@PathVariable("postId") String postId, @RequestBody PostRequest postRequest) {
         String updatePostId = postService.updatePost(postId, postRequest);
@@ -42,6 +43,7 @@ public class PostController {
         return new ResponseEntity<>(headers, HttpStatus.NO_CONTENT);
     }
 
+    // Endpoint to delete a post
     @DeleteMapping("/{postId}")
     public ResponseEntity<?> deletePost(@PathVariable("postId") String postId) {
         postService.deletePost(postId);

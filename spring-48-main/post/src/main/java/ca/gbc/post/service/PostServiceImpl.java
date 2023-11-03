@@ -21,6 +21,7 @@ public class PostServiceImpl implements PostService {
     private final PostRepository postRepository;
     private final MongoTemplate mongoTemplate;
 
+    // Method to create a new post
     @Override
     public void createPost(PostRequest postRequest) {
         log.info("Creating a new post: {}", postRequest.getTitle());
@@ -35,6 +36,7 @@ public class PostServiceImpl implements PostService {
         log.info("Post {} is saved", post.getId());
     }
 
+    // Method to update a post
     @Override
     public String updatePost(String postId, PostRequest postRequest) {
         log.info("Updating a post with Id: {}", postId);
@@ -54,12 +56,14 @@ public class PostServiceImpl implements PostService {
         return postId;
     }
 
+    // Method to delete a post
     @Override
     public void deletePost(String postId) {
         log.info("Deleting post with Id: {}", postId);
         postRepository.deleteById(postId);
     }
 
+    // Method to retrieve a list of all posts
     @Override
     public List<PostResponse> getAllPosts() {
         log.info("Returning a list of posts");
@@ -67,6 +71,7 @@ public class PostServiceImpl implements PostService {
         return posts.stream().map(this::mapToPostResponse).toList();
     }
 
+    // Helper method to map Post entity to PostResponse DTO
     private PostResponse mapToPostResponse(Post post) {
         return PostResponse.builder()
                 .id(post.getId())
@@ -76,4 +81,3 @@ public class PostServiceImpl implements PostService {
                 .build();
     }
 }
-

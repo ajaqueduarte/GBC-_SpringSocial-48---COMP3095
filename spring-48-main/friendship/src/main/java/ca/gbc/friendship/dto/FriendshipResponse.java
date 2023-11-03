@@ -12,6 +12,6 @@ import java.util.List;
 @Builder
 @Data
 public class FriendshipResponse {
-    private Long userId;
-    private List<Long> friendList;
+    private Long userId;          // ID of the user for which the friend list is being retrieved
+    private List<Long> friendList;  // List of IDs representing the user's friends
 }

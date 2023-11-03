@@ -7,5 +7,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface PostRepository extends MongoRepository<Post, String> {
     @DeleteQuery
-    void deleteById(String postId);
+    void deleteById(String postId); // Custom delete query method to delete a post by its ID
 }

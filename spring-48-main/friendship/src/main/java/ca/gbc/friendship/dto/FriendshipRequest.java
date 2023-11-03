@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @Data
 public class FriendshipRequest {
-    private Long userId;
-    private Long otherUserId;
+    private Long userId;        // ID of the user initiating the friendship action
+    private Long otherUserId;   // ID of the user involved in the friendship action
 }

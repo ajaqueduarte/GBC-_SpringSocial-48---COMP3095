@@ -17,8 +17,9 @@ import java.util.Optional;
 @Slf4j
 public class CommentServiceImpl implements CommentService {
 
-    private final CommentRepository commentRepository;
+    private final CommentRepository commentRepository; // Repository for managing comments
 
+    // Method to create a new comment
     @Override
     public void createComment(CommentRequest commentRequest) {
         log.info("Creating a new comment: {}", commentRequest.getContent());
@@ -33,6 +34,7 @@ public class CommentServiceImpl implements CommentService {
         log.info("Comment {} is saved", comment.getId());
     }
 
+    // Method to update a comment
     @Override
     public Long updateComment(Long commentId, CommentRequest commentRequest) {
         log.info("Updating a comment with Id: {}", commentId);
@@ -51,12 +53,14 @@ public class CommentServiceImpl implements CommentService {
         return commentId;
     }
 
+    // Method to delete a comment
     @Override
     public void deleteComment(Long commentId) {
         log.info("Deleting comment with Id: {}", commentId);
         commentRepository.deleteById(commentId);
     }
 
+    // Method to retrieve all comments
     @Override
     public List<CommentResponse> getAllComments() {
         log.info("Returning a list of comments");
@@ -64,6 +68,7 @@ public class CommentServiceImpl implements CommentService {
         return comments.stream().map(this::mapToCommentResponse).toList();
     }
 
+    // Helper method to map Comment object to CommentResponse
     private CommentResponse mapToCommentResponse(Comment comment) {
         return CommentResponse.builder()
                 .id(comment.getId())

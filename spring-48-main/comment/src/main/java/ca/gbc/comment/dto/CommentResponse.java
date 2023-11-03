@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CommentResponse {
-    private Long id;
-    private String postId;
-    private String content;
-    private String author;
+    private Long id;       // Unique identifier for the comment
+    private String postId;  // ID of the post associated with the comment
+    private String content; // Text content of the comment
+    private String author;  // Author of the comment
 }

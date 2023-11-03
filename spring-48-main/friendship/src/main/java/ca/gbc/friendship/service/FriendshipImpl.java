@@ -18,9 +18,11 @@ import java.util.Objects;
 @RequiredArgsConstructor
 @Slf4j
 public class FriendshipImpl implements FriendshipService {
-    private final FriendshipRepository friendshipRepository;
-    private final MongoTemplate mongoTemplate;
 
+    private final FriendshipRepository friendshipRepository; // Repository for managing Friendships
+    private final MongoTemplate mongoTemplate; // MongoDB template for executing queries
+
+    // Method to add a friend
     @Override
     public void addFriend(FriendshipRequest friendshipRequest) {
         Query query = new Query();
@@ -42,6 +44,7 @@ public class FriendshipImpl implements FriendshipService {
         mongoTemplate.save(fs);
     }
 
+    // Method to delete a friend
     @Override
     public void deleteFriend(FriendshipRequest friendshipRequest) {
         Query query = new Query();
@@ -54,6 +57,8 @@ public class FriendshipImpl implements FriendshipService {
 
         fs.getFriends().removeIf(x -> Objects.equals(x, friendshipRequest.getOtherUserId()));
     }
+
+    // Method to get a list of friends
     @Override
     public FriendshipResponse getFriendList(Long userId) {
         Query query = new Query().addCriteria(Criteria.where("userId").is(userId));

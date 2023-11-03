@@ -17,18 +17,20 @@ import java.util.List;
 public class CommentController {
 
     private final CommentServiceImpl commentService;
-
+    // Creating a comment via POST request
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void createComment(@RequestBody CommentRequest commentRequest) {
         commentService.createComment(commentRequest);
     }
-
+    // Retrieving all comments via GET request
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<CommentResponse> getAllComments() {
         return commentService.getAllComments();
     }
+
+    // Updating a comment via PUT request using commentId
 
     @PutMapping("/{commentId}")
     public ResponseEntity<?> updateComment(@PathVariable("commentId") Long commentId, @RequestBody CommentRequest commentRequest) {
@@ -40,6 +42,7 @@ public class CommentController {
         return new ResponseEntity<>(headers, HttpStatus.NO_CONTENT);
     }
 
+    // Deleting a comment via DELETE request using commentId
     @DeleteMapping("/{commentId}")
     public ResponseEntity<?> deleteComment(@PathVariable("commentId") Long commentId) {
         commentService.deleteComment(commentId);

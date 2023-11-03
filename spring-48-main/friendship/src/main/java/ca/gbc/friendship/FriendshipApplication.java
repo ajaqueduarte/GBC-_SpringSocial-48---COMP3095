@@ -11,3 +11,4 @@ public class FriendshipApplication {
     }
 
 }
+//This is the main entry point for the Friendship Application.

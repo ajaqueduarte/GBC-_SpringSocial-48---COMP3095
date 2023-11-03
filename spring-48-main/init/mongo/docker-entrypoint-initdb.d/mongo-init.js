@@ -1,8 +1,9 @@
 print("START")
 
-// comment db
+// Connecting to the 'springsocial' database
 db = db.getSiblingDB('springsocial');
 
+// Creating a new user 'mongoadmin' with readWrite role for 'springsocial' database
 db.createUser(
     {
         user: 'mongoadmin',
@@ -11,8 +12,10 @@ db.createUser(
     }
 );
 
+//Creating a collection named "comment"
 db.createCollection("comment");
+//Creating a collection named "post"
 db.createCollection("post");
-// db.createCollection("user");
+
 
 print("END");

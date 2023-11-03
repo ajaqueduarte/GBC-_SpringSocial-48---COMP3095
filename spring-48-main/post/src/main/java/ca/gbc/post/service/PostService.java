@@ -6,11 +6,14 @@ import ca.gbc.post.dto.PostResponse;
 import java.util.List;
 
 public interface PostService {
-    void createPost(PostRequest postRequest);
+    // Interface defining the contract for post-related operations
 
-    String updatePost(String postId, PostRequest postRequest);
+    void createPost(PostRequest postRequest);  // Method to create a new post
 
-    void deletePost(String postId);
+    String updatePost(String postId, PostRequest postRequest);  // Method to update a post
 
-    List<PostResponse> getAllPosts();
+    void deletePost(String postId);  // Method to delete a post
+
+    List<PostResponse> getAllPosts();  // Method to retrieve a list of all posts
 }
+

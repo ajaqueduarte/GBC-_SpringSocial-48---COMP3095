@@ -11,3 +11,6 @@ public class CommentApplication {
     }
 
 }
+//This is the main entry point for the Comment Application.
+// The SpringApplication.run method initializes the Spring Boot application,
+// enabling it to start and serve the defined functionalities for managing comments.
